@@ -1,7 +1,7 @@
 # Movie Explorer App
 
 ## Description
-A Netflix-inspired React app that searches the OMDb API and displays movie titles, posters, and release years. It starts with Batman and updates results when you type.
+A Netflix-inspired React app that searches the OMDb API and displays movie titles, posters, and release years. It starts with recommended movies and shows search results when you type. Clearing the search restores recommendations.
 
 ## Run locally
 ```sh
@@ -13,7 +13,7 @@ Open the local address printed in the terminal. Use `npm run build` to build for
 The shared class OMDb key from the assignment is the default. If it expires or hits its quota, copy `.env.example` to `.env`, replace the value with your own key from https://www.omdbapi.com/apikey.aspx, and restart the app. Vite frontend environment variables are visible in the browser; this is not a secret-key storage system.
 
 ## Features
-- Controlled search input and default Batman search
+- Controlled search input and recommended movies when the search is empty
 - Live API fetching using `useEffect`, `fetch`, and `async/await`
 - Reusable `useMovies(searchTerm)` custom hook
 - Loading, API/network error, no-results, and blank-search states
@@ -25,7 +25,7 @@ The shared class OMDb key from the assignment is the default. If it expires or h
 - Movie links to IMDb
 - Accessible labels, status announcements, and keyboard focus styles
 
-OMDb returns up to 10 matches per page. This app displays the first page and labels the count as movies shown.
+OMDb returns up to 10 matches per page. Search displays the first page and labels the count as movies shown. Recommendations combine five preset title searches (Batman, Interstellar, Spider-Man, Harry Potter, and Toy Story), removing duplicates. These are a fixed discovery selection, not personalized recommendations or the entire OMDb catalog.
 
 ## Component structure
 ```text
@@ -51,7 +51,7 @@ These are draft answers about this implementation. Rewrite the personal answers 
 The hook keeps the fetching and request-state logic together and separates it from the UI. Components can focus on displaying data, and another component could reuse the same hook.
 
 ### 2. What does your useEffect depend on?
-It depends on `searchTerm`. Each change cancels the previous timer/request and schedules a new search. An empty search clears results without calling the API.
+It depends on `searchTerm`. Each change cancels the previous timer/request and schedules a new search. An empty search loads recommendations from five preset title searches and removes duplicate movies.
 
 ### 3. How did you handle loading and error states?
 The hook tracks `loading` and `error` alongside `movies`. It sets loading before the debounce, clears old errors, catches failed requests and OMDb errors, and resets loading when the active request finishes. `StatusMessage` renders the appropriate feedback. A movie-not-found response becomes an empty list rather than a service error.

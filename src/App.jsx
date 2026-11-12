@@ -1,25 +1,79 @@
-import { useState } from 'react';
-import SearchBar from './components/SearchBar';
-import StatusMessage from './components/StatusMessage';
-import MovieList from './components/MovieList';
-import useMovies from './hooks/useMovies';
+import { useState } from "react";
+import SearchBar from "./components/SearchBar";
+import StatusMessage from "./components/StatusMessage";
+import MovieList from "./components/MovieList";
+import useMovies from "./hooks/useMovies";
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState('Batman');
+  const [searchTerm, setSearchTerm] = useState("");
   const { movies, loading, error } = useMovies(searchTerm);
 
   return (
     <div className="app-shell">
-      <header className="site-header"><a href="./" className="brand"><span className="brand-mark" aria-hidden="true">M<span> / </span>E</span>Movie Explorer<span className="brand-dot">.</span></a><span className="header-note">A WORLD OF STORIES</span></header>
+      <header className="site-header">
+        <a href="./" className="brand">
+          <span className="brand-mark" aria-hidden="true">
+            M<span> / </span>E
+          </span>
+          Movie Explorer<span className="brand-dot">.</span>
+        </a>
+        <span className="header-note">A WORLD OF STORIES</span>
+      </header>
       <main>
-        <section className="intro" aria-labelledby="page-title"><p className="eyebrow"><span /> THE NEXT GREAT WATCH STARTS HERE</p><h1 id="page-title">Find your next<br /><em>favorite movie.</em></h1><p className="intro-copy">From familiar favorites to new discoveries.<br className="mobile-break" /> A good story is just a search away.</p><SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} /></section>
-        <section className="results" aria-labelledby="results-title" aria-busy={loading}>
-          <div className="section-heading"><h2 id="results-title">{searchTerm.trim() ? <>Results for <span>“{searchTerm.trim()}”</span></> : 'Your next discovery'}</h2><span className="result-count" aria-live="polite">{!loading && !error && `${movies.length} ${movies.length === 1 ? 'movie' : 'movies'} shown`}</span></div>
-          <StatusMessage loading={loading} error={error} movieCount={movies.length} searchTerm={searchTerm} />
+        <section className="intro" aria-labelledby="page-title">
+          <p className="eyebrow">
+            <span /> THE NEXT GREAT WATCH STARTS HERE
+          </p>
+          <h1 id="page-title">
+            Find your next
+            <br />
+            <em>favorite movie.</em>
+          </h1>
+          <p className="intro-copy">
+            From familiar favorites to new discoveries.
+            <br className="mobile-break" /> A good story is just a search away.
+          </p>
+          <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+        </section>
+        <section
+          className="results"
+          aria-labelledby="results-title"
+          aria-busy={loading}
+        >
+          <div className="section-heading">
+            <h2 id="results-title">
+              {searchTerm.trim() ? (
+                <>
+                  Results for <span>“{searchTerm.trim()}”</span>
+                </>
+              ) : (
+                "Recommended movies"
+              )}
+            </h2>
+            <span className="result-count" aria-live="polite">
+              {!loading &&
+                !error &&
+                `${movies.length} ${movies.length === 1 ? "movie" : "movies"} shown`}
+            </span>
+          </div>
+          <StatusMessage
+            loading={loading}
+            error={error}
+            movieCount={movies.length}
+            searchTerm={searchTerm}
+          />
           {!loading && !error && <MovieList movies={movies} />}
         </section>
       </main>
-      <footer><span className="footer-brand">Movie Explorer.</span><span>Made for movie nights. <a href="https://www.omdbapi.com/" target="_blank" rel="noreferrer">Data from OMDb ↗</a></span></footer>
+      <footer>
+        <span className="footer-brand">Movie Explorer.</span>
+        <span>
+          Made for movie nights.{" "}
+          <a href="https://www.omdbapi.com/" target="_blank" rel="noreferrer">
+            Data from OMDb ↗
+          </a>
+        </span>
+      </footer>
     </div>
   );
 }
