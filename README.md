@@ -21,7 +21,6 @@ The shared class OMDb key from the assignment is the default. If it expires or h
 - Request cancellation to prevent outdated results
 - Responsive movie grid with title, poster, and year
 - Missing/broken poster fallback
-- Suggested search buttons
 - Movie links to IMDb
 - Accessible labels, status announcements, and keyboard focus styles
 

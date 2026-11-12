@@ -17,22 +17,10 @@ export default function App() {
           </span>
           Movie Explorer<span className="brand-dot">.</span>
         </a>
-        <span className="header-note">A WORLD OF STORIES</span>
       </header>
       <main>
         <section className="intro" aria-labelledby="page-title">
-          <p className="eyebrow">
-            <span /> THE NEXT GREAT WATCH STARTS HERE
-          </p>
-          <h1 id="page-title">
-            Find your next
-            <br />
-            <em>favorite movie.</em>
-          </h1>
-          <p className="intro-copy">
-            From familiar favorites to new discoveries.
-            <br className="mobile-break" /> A good story is just a search away.
-          </p>
+          <h1 id="page-title">Find a movie.</h1>
           <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
         </section>
         <section
@@ -66,13 +54,7 @@ export default function App() {
         </section>
       </main>
       <footer>
-        <span className="footer-brand">Movie Explorer.</span>
-        <span>
-          Made for movie nights.{" "}
-          <a href="https://www.omdbapi.com/" target="_blank" rel="noreferrer">
-            Data from OMDb ↗
-          </a>
-        </span>
+        <a href="https://www.omdbapi.com/" target="_blank" rel="noreferrer">Powered by OMDb</a>
       </footer>
     </div>
   );

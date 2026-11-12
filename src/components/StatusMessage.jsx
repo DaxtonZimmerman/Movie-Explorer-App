@@ -17,17 +17,10 @@ export default function StatusMessage({
         {loading
           ? "Loading movies..."
           : error
-            ? "Something went wrong"
+            ? "Error fetching movies"
             : "No movies found"}
       </h3>
-      <p>
-        {loading
-          ? "Finding your next great watch."
-          : error ||
-            (searchTerm.trim()
-              ? "Try a different movie title."
-              : "No recommendations available. Try searching for a title.")}
-      </p>
+      {error ? <p>{error.replace(/^Error fetching movies\.\s*/, "")}</p> : !loading && <p>Try another title.</p>}
     </div>
   );
 }
