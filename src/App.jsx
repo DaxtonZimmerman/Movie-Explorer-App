@@ -12,9 +12,6 @@ export default function App() {
     <div className="app-shell">
       <header className="site-header">
         <a href="./" className="brand">
-          <span className="brand-mark" aria-hidden="true">
-            M<span> / </span>E
-          </span>
           Movie Explorer<span className="brand-dot">.</span>
         </a>
       </header>
